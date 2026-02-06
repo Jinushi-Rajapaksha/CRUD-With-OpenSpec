@@ -35,6 +35,29 @@ namespace ProductsApi.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return product;
         }
-        
+
+        public async Task<Product?> UpdateAsync(int id, Product product)
+        {
+            var existing = await _context.Products.FindAsync(id);
+            if (existing == null) return null;
+
+            existing.Name = product.Name;
+            existing.Description = product.Description;
+            existing.Price = product.Price;
+            existing.Stock = product.Stock;
+
+            await _context.SaveChangesAsync();
+            return existing;
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null) return false;
+
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

@@ -71,5 +71,33 @@ namespace ProductsApi.Application.Services
             };
         }
 
+        public async Task<ProductDto?> UpdateProductAsync(int id, UpdateProductDto productDto)
+        {
+            var product = new Product
+            {
+                Name = productDto.Name,
+                Description = productDto.Description,
+                Price = productDto.Price,
+                Stock = productDto.Stock
+            };
+
+            var updated = await _repository.UpdateAsync(id, product);
+            if (updated == null) return null;
+
+            return new ProductDto
+            {
+                Id = updated.Id,
+                Name = updated.Name,
+                Description = updated.Description,
+                Price = updated.Price,
+                Stock = updated.Stock
+            };
+        }
+
+        public async Task<bool> DeleteProductAsync(int id)
+        {
+            return await _repository.DeleteAsync(id);
+        }
+
     }
 }
