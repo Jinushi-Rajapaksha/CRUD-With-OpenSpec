@@ -11,8 +11,7 @@
 
 [Getting Started](#-getting-started) •
 [Features](#-features) •
-[Documentation](#-openspec-workflow) •
-[Contributing](#-contributing)
+[Documentation](#-openspec-workflow)
 
 </div>
 
